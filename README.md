@@ -10,20 +10,20 @@ e usasse IA para transformar/formatar os dados antes de enviar uma versão reduz
 
 ## Resumo e Problemas
 
-- n8n é ótimo para orquestrar esse tipo de fluxo (webhook -> transformação -> notificação) sem escrever tudo à mão.
+- n8n é ótimo para orquestrar esse tipo de fluxo (webhook -> processamento -> notificação) sem escrever tudo à mão.
 - Tentei rodar Python puro dentro do container do n8n e não deu certo (n8n é Node.js
   por natureza) — contornei fazendo essa parte fora, no próprio pipeline de origem.
 - Ainda é um fluxo básico, não chegou a rodar em produção — mas validou a ideia.
 
 ## Ambiente (Docker)
 
-### Subir o ambiente
+### Subir o ambiente Docker
 ```bash
 docker compose build
 docker compose up -d 
 ```
 
-### Comandos úteis
+### Comandos Docker úteis
 ```bash
 docker compose down                  # para parar o ambiente mantendo os volumes
 docker compose down -v ou --volumes  # para o ambiente e remove os volumes
@@ -31,4 +31,42 @@ docker ps                            # containers rodando
 docker logs <containerId>            # debug
 ``` 
 ## Notas
-<!-- espaço para você completar detalhes específicos que só você sabe -->
+
+O container do mysql na primeira vez que ele for criado uma tabela `users`vai ser criada para facilitar no start com os bancos.
+
+
+`mysql:`
+- user: root
+- password: root
+- port: 3306
+ 
+`adminer:`
+- https://localhost:8080
+
+`postgresql:`
+  - user: postgres
+  - password: root
+  - port: 5432
+  - 
+`pgadmin:`
+  - localhost:3000
+
+## Praticidade com seu Ambiente
+
+Adicionei dois scritps de shell básicos, para ficar mais prático subir e descer todos os serviços. Caso você tenha algum problema com os containers/volumes você terar que recorrer diretamente ao docker. Os comandos **prune** sempre ajudam.
+
+- `up.sh`
+- `down.sh`
+
+Executando:
+
+```bash 
+  ./up.sh
+  ./down.sh
+  bash up.sh
+  bash down.sh
+``` 
+
+Se tudo der certo:
+
+![containers](image.png)
