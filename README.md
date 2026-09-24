@@ -1,4 +1,4 @@
-# n8n_docker_env
+# dbs_docker_env
 
 Ambiente Docker com n8n + PostgreSQL. Minha primeira experiência real com automação de workflow e uso de IA via API. 
 
